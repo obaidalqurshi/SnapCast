@@ -3,14 +3,14 @@ import VideoCard from '@/components/VideoCard';
 import { dummyCards } from '@/constants';
 import React from 'react'
 
-const Page = async ({params}: ParamsWithSearch) => {
-    const {id} = await params;
+const Page = async ({ params }: ParamsWithSearch) => {
+  const { id } = await params;
   return (
     <div className='wrapper page'>
-        <Header subHeader='obaid@gmain.com' title='obaid' userImg='/assets/images/dummy.jpg' /> 
-        <section className='video-grid'>        {dummyCards.map((card)=>(
-  <VideoCard key={card.id} {...card} />
-))}</section>
+      <Header subHeader='obaid@gmain.com' title='obaid' userImg='/assets/images/dummy.jpg' />
+      <section className='video-grid'>        {dummyCards.map((card) => (
+        <VideoCard key={card.id} {...card} />
+      ))}</section>
 
     </div>
   )
