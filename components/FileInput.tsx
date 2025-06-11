@@ -9,11 +9,18 @@ const FileInput = ({id, label, accept, file, previewUrl, inputRef, onChange, onR
         <input type='file' id={id} accept={accept} ref={inputRef} hidden onChange={onChange} />
 
         {!previewUrl ?(
-            <figure>
+            <figure onClick={()=> inputRef.current?.click()}>
                  <Image src='/assets/icons/upload.svg' alt='upload' width={24} height={24} />
                  <p>Click to upload your {id}</p>
             </figure>
-        ): (<div></div>)}
+        ): (<div>
+            {type === 'video' ? <video src={previewUrl} controls /> :
+            <Image src={previewUrl} alt='image' fill />}
+            <button type='button' onClick={onReset}>
+            <Image src='/assets/icons/close.svg' alt='close' width={16} height={16} />
+            </button>
+            <p>{file?.name}</p>
+        </div>)}
     </section>
   )
 }
