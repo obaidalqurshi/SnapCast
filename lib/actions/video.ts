@@ -33,7 +33,7 @@ const revalidatePaths = (paths: string[]) =>{
 export const getVideoUploadUrl = withErrorHandling(async ()=>{
 
  await getSessionUserId();
- const videoResponse = await apiFetch(
+ const videoResponse = await apiFetch<BunnyVideoResponse>(
     `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos`,
  {
     method: 'POST',
@@ -41,7 +41,7 @@ export const getVideoUploadUrl = withErrorHandling(async ()=>{
     body: {title: 'Temporary Title', collectionId: ''}
  }
  );
- const uploadUrl = `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/vides/${videoResponse.guid}`
+ const uploadUrl = `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos/${videoResponse.guid}`
 
  return {
     videoId: videoResponse.guid,
@@ -71,16 +71,17 @@ export const saveVideoDetials = withErrorHandling(async (videoDetails: VideoDeta
             bunnyType: 'stream',
             body:{
                 title: videoDetails.title,
-                desciption: videoDetails.description
+                description: videoDetails.description
             }
         }
     )
+    const now = new Date();
     await db.insert(videos).values({
-        ...videoDetails,
-        videoUrl: `${BUNNY.EMBED_URL}/${BUNNY_LIBRARY_ID}/${videoDetails.videoId}`,
-        userId,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+      ...videoDetails,
+      videoUrl: `${BUNNY.EMBED_URL}/${BUNNY_LIBRARY_ID}/${videoDetails.videoId}`,
+      userId,
+      createdAt: now,
+      updatedAt: now,
     });
  revalidatePaths(['/'])
 
