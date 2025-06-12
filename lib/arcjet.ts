@@ -3,7 +3,7 @@ import arcjet from '@arcjet/next';
 import { getEnv } from './utils'
 
 const aj = arcjet({
-    key: getEnv('ARJECT_API_KEY'),
+    key: getEnv('ARCJET_API_KEY'),
     rules: [],
 })
 
