@@ -92,7 +92,7 @@ export const getThumbnailUploadUrl = withErrorHandling(async(videoId: string)=>{
     }
 })
 
-export const saveVideoDetials = withErrorHandling(async (videoDetails: VideoDetails)=>{
+export const saveVideoDetails = withErrorHandling(async (videoDetails: VideoDetails)=>{
     const userId = await getSessionUserId();
     await validateWithArcjet(userId)
     await apiFetch(`${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos/${videoDetails.videoId}`,
