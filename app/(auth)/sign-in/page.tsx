@@ -13,7 +13,7 @@ const Page = () => {
       <aside className='testimonial'>
         <Link href='/'>
           <Image src='/assets/icons/logo.svg' alt='logo' width={32} height={32} />
-          <h1>SnapCase</h1>
+          <h1>SnapCast</h1>
         </Link>
         <div className='description'>
           <section>
