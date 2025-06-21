@@ -1,3 +1,4 @@
+import EmptyState from '@/components/EmptyState'
 import Header from '@/components/Header'
 import VideoCard from '@/components/VideoCard'
 import { dummyCards } from '@/constants'
@@ -14,11 +15,14 @@ const Page = async ({ searchParams }: SearchParams) => {
       <Header title='All Videos' subHeader='Public library' />
       <h1 className='text-2xl font-karla'> Welcome to Loom Clone</h1>
       <section className='video-grid'>
+
         {videos?.length > 0 ? (
           <section className='video-grid'>
-            {videos[0].video.title}
+            {videos.map(({video, user})=>(
+              <VideoCard  key={video.id} {...video} thumbnail={video.thumbnailUrl} userImg={user?.image || ''} username={user?.name || 'Guest'}/>
+            ))}
           </section>
-        ) : (<div>empty</div>)}
+        ) : (<EmptyState icon='/assets/icons/video.svg' title='No Videos Found' description='Try adjusting your search' />)}
       </section>
     </main>
   )
